@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Lanche Escolar</title>
+
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header{
+            background-color: #ff6600;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container{
+            width: 90%;
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align: center;
+            color: #333;
+        }
+
+        .menu-item{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .menu-info{
+            flex: 1;
+        }
+
+        .menu-info h3{
+            margin: 0;
+            color: #444;
+        }
+
+        .menu-info p{
+            margin: 5px 0;
+            color: #777;
+        }
+
+        .quantidade{
+            width: 60px;
+            padding: 5px;
+        }
+
+        .dados-aluno{
+            margin-top: 30px;
+        }
+
+        .dados-aluno input{
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button{
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: #218838;
+        }
+
+        footer{
+            text-align: center;
+            padding: 15px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🥪 BEM-VINDO Á TOCA DO GRILO</h1>
+        <p>Fazer o seu pedido do lance partir da sala de aula,</p>
+        <p>nunca foi mais rápido, fácil e prático. </p>
+    </header>
+
+    <div class="container">
+
+        <h2>Menu de Lanches do JIX</h2>
+
+        <div class="menu-item">
+            <div class="menu-info">
+                <h3>Hambúrguer</h3>
+                <p>Preço: 1.500 Kz</p>
+            </div>
+
+            <input type="number" class="quantidade" min="0" value="0">
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-info">
+                <h3>Pizza</h3>
+                <p>Preço: 2.000 Kz</p>
+            </div>
+
+            <input type="number" class="quantidade" min="0" value="0">
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-info">
+                <h3>Sumo</h3>
+                <p>Preço: 500 Kz</p>
+            </div>
+
+            <input type="number" class="quantidade" min="0" value="0">
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-info">
+                <h3>Salgado</h3>
+                <p>Preço: 700 Kz</p>
+            </div>
+
+            <input type="number" class="quantidade" min="0" value="0">
+        </div>
+
+        <div class="menu-item">
+            <div class="menu-info">
+                <h3>Bolo</h3>
+                <p>Preço: 800 Kz</p>
+            </div>
+
+            <input type="number" class="quantidade" min="0" value="0">
+        </div>
+
+        <div class="dados-aluno">
+            <h2>Dados do Aluno</h2>
+
+            <input type="text" placeholder="Nome do aluno">
+            <input type="text" placeholder="Turma">
+            <input type="text" placeholder="Número da sala">
+        </div>
+
+       <button onclick="enviarPedido()">Enviar Pedido</button>
+
+<script>
+
+function enviarPedido() {
+
+    let nome = document.querySelectorAll("input")[5].value;
+    let turma = document.querySelectorAll("input")[6].value;
+    let sala = document.querySelectorAll("input")[7].value;
+
+    let quantidades = document.querySelectorAll(".quantidade");
+
+    let produtos = [
+        {nome: "Hambúrguer", preco: 1500},
+        {nome: "Pizza", preco: 2000},
+        {nome: "Sumo", preco: 500},
+        {nome: "Salgado", preco: 700},
+        {nome: "Bolo", preco: 800}
+    ];
+
+    let mensagem = " *NOVO PEDIDO*\n\n";
+
+    mensagem += "Aluno: " + nome + "\n";
+    mensagem += "Turma: " + turma + "\n";
+    mensagem += "Sala: " + sala + "\n\n";
+
+    let total = 0;
+
+    for(let i = 0; i < produtos.length; i++){
+
+        let qtd = parseInt(quantidades[i].value);
+
+        if(qtd > 0){
+
+            let subtotal = qtd * produtos[i].preco;
+
+            mensagem += "• " + produtos[i].nome +
+            " | Qtd: " + qtd +
+            " | " + subtotal + " Kz\n";
+
+            total += subtotal;
+        }
+    }
+
+    mensagem += "\n💰 TOTAL: " + total + " Kz";
+
+    // Número da cozinha
+    let numero = "244947269726";
+
+    // Abrir WhatsApp
+    let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
+
+    window.open(url, "_blank");
+}
+
+</script>
+    </div>
+
+    <footer>
+        Sistema de Pedido de Lanches © 2026
+    </footer>
+
+</body>
+</html>
